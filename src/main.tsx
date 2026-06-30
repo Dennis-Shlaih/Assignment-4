@@ -8,11 +8,11 @@ import App from './App.tsx'
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
     <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </StrictMode>,
-  </BrowserRouter>
-)
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </BrowserRouter>
+    </StrictMode>
+);

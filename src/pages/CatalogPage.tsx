@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { fetchItems } from '../services/api'
+import SearchBar from '../components/SearchBar'
 import type { Item } from '../types/Item'
 
 function CatalogPage() {
@@ -19,14 +20,20 @@ function CatalogPage() {
     if (isError) {
         return <p>Error loading catalog</p>
     }
+    
+    const [searchParams] = useSearchParams();
+    const query = searchParams.get("q") ?? "";
+    const filteredData = data?.filter((item) => 
+        item.title.toLowerCase().includes(query.toLowerCase()));
 
     return (
         <main className="p-6">
             <h1 className="text-3xl font-bold mb-6">
                 MyWatch
             </h1>
+            <SearchBar/>
             <div className="space-y-4">
-                {data?.map((item) => (
+                {filteredData.map((item) => (
                 <Link 
                     to={`/items/${item.id}`}
                     key = {item.id}

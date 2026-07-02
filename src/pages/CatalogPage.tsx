@@ -5,6 +5,7 @@ import SearchBar from '../components/SearchBar'
 import type { Item } from '../types/Item'
 
 function CatalogPage() {
+    const [searchParams] = useSearchParams();
     const {
         data,
         isPending,
@@ -20,8 +21,10 @@ function CatalogPage() {
     if (isError) {
         return <p>Error loading catalog</p>
     }
+    if (!data) {
+        return <p>No data</p>
+    }
     
-    const [searchParams] = useSearchParams();
     const query = searchParams.get("q") ?? "";
     const filteredData = data?.filter((item) => 
         item.title.toLowerCase().includes(query.toLowerCase()));

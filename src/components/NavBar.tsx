@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom';
+
 import DensitySelector from './DensitySelector';
 import ThemeToggle from './ThemeToggle';
+
 import { useUiStore } from '../store/useUiStore';
 
 function NavBar() {
@@ -16,7 +18,7 @@ function NavBar() {
     return (
         <nav className="flex flex-wrap justify-between items-center gap-4 p-4 border-b">
             <ul className="flex flex-wrap items-center gap-2">
-                <li><NavLink to='/' className={linkClasses}>Home</NavLink></li>
+                <li><NavLink to='/' end className={linkClasses}>Home</NavLink></li>
                 <li><NavLink to='/list/want' className={linkClasses}>Want</NavLink></li>
                 <li><NavLink to='/list/active' className={linkClasses}>Active</NavLink></li>
                 <li><NavLink to='/list/done' className={linkClasses}>Done</NavLink></li>

@@ -1,4 +1,6 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import DensitySelector from './DensitySelector';
+import ThemeToggle from './ThemeToggle';
 
 function NavBar() {
     const linkClasses = ({isActive}: {isActive: boolean}) => 
@@ -8,8 +10,8 @@ function NavBar() {
                 : "text-gray-700 hover:bg-gray-200"
         }`;
     return (
-        <nav className="flex items-center gap-2 p-4 border-b">
-            <ul>
+        <nav className="flex items-center justify-between p-4 border-b">
+            <ul className="flex gap-4">
                 <li>
                     <NavLink to='/' className={linkClasses}>Home</NavLink>
                 </li>
@@ -29,6 +31,10 @@ function NavBar() {
                     <NavLink to ='/about' className={linkClasses}>About</NavLink>
                 </li>
             </ul>
+            <div>
+                <DensitySelector />
+                <ThemeToggle />
+            </div>
         </nav>
     );
 }

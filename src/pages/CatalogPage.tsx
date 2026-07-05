@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link, useSearchParams } from 'react-router-dom'
 import { fetchItems } from '../services/api'
+
+import { useUiStore } from "../store/useUiStore";
+
 import SearchBar from '../components/SearchBar'
 import type { Item } from '../types/Item'
 
@@ -14,6 +17,8 @@ function CatalogPage() {
         queryKey: ["items"],
         queryFn: fetchItems
     });
+
+    const density = useUiStore((state) => state.density);
 
     if (isPending) {
         return <p>Loading...</p>
@@ -42,7 +47,12 @@ function CatalogPage() {
                     key = {item.id}
                     className="block"
                 >
-                    <div className="p-4 border rounded">
+                    <div className={`border rounded ${
+                        density === "compact" 
+                        ? "p-2" 
+                        : "p-5"
+                    }`}
+                    >
                         <h2 className="font-semibold">
                             {item.title}
                         </h2>

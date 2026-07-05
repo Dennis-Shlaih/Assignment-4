@@ -28,6 +28,32 @@ function DetailPage() {
         },
     });
 
+    const ratingMutation = useMutation({
+        mutationFn: (newRating: number | null) =>
+            updateItem(Number(id), {
+                rating: newRating,
+            }),
+
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["items"],
+            });
+        },
+    });
+
+    const noteMutation = useMutation({
+        mutationFn: (newNote: string) =>
+            updateItem(Number(id), {
+                note: newNote,
+            }),
+
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["items"],
+            });
+        },
+    });
+
     if (isPending) {
         return <p>Loading...</p>
     }
@@ -37,8 +63,6 @@ function DetailPage() {
      if (!data) {
         return <p>Item not found.</p>;
     }
-
-    
 
     return (
         <main className="p-6">
@@ -64,6 +88,21 @@ function DetailPage() {
                 <option value="active">Active</option>
                 <option value="done">Done</option>
                 <option value="dropped">Dropped</option>
+            </select>
+            <select
+                value={data.rating ?? ""}
+                onChange={(e) =>
+                    ratingMutation.mutate(
+                        e.target.value === "" ? null : Number(e.target.value)
+                    )
+                }
+                className="border rounded p-2"
+            >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
             </select>
         </main>
     );

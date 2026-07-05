@@ -1,5 +1,6 @@
+import type {Item} from '../types/Item';
+
 const API_URL = "http://localhost:3001";
-import type {Item} from '../types/Item'
 export async function fetchItems() {
     const response = await fetch(`${API_URL}/items`);
 

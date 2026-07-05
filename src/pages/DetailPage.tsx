@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
-import { fetchItem, updateItem } from '../services/api'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
 
-import type { Item } from '../types/Item'
+import { fetchItem, updateItem } from '../services/api';
+import { useUiStore } from '../store/useUiStore';
+
+import type { Item } from '../types/Item';
 
 function DetailPage() {
     const queryClient = useQueryClient();
     const { id } = useParams()
-
+    const theme = useUiStore((state) => state.theme);
     const {data, isPending, isError} = useQuery<Item>(
         {
             queryKey: ["items", id],
@@ -18,40 +20,25 @@ function DetailPage() {
     
     const statusMutation = useMutation({
         mutationFn: (newStatus: Item["status"]) =>
-            updateItem(Number(id), {
-                status: newStatus,
-            }),
-
+            updateItem(Number(id), { status: newStatus }),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ["items"],
-            });
+            queryClient.invalidateQueries({ queryKey: ["items"] });
         },
     });
 
     const ratingMutation = useMutation({
         mutationFn: (newRating: number | null) =>
-            updateItem(Number(id), {
-                rating: newRating,
-            }),
-
+            updateItem(Number(id), { rating: newRating }),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ["items"],
-            });
+            queryClient.invalidateQueries({ queryKey: ["items"] });
         },
     });
 
     const noteMutation = useMutation({
         mutationFn: (newNote: string | null) =>
-            updateItem(Number(id), {
-                note: newNote,
-            }),
-
+            updateItem(Number(id), { note: newNote }),
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ["items"],
-            });
+            queryClient.invalidateQueries({ queryKey: ["items"] });
         },
     });
     
@@ -62,73 +49,71 @@ function DetailPage() {
         }
     }, [data]);
 
-    if (isPending) {
-        return <p>Loading...</p>
-    }
-    if (isError) {
-        return <p>Error loading item</p>
-    }
-     if (!data) {
-        return <p>Item not found.</p>;
-    }
+    const selectClass = `border rounded p-2 ${
+        theme === "dark"
+            ? "bg-gray-800 text-white border-gray-600"
+            : "bg-white text-black border-gray-300"
+    }`;
+
+    if (isPending) return <p>Loading...</p>
+    if (isError) return <p>Error loading item</p>
+    if (!data) return <p>Item not found.</p>
 
     return (
-        <main className="p-6">
-            <h1 className="text-3xl font-bold">
-                {data.title}
-            </h1>
+        <main className="max-w-2xl mx-auto p-6">
+            <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
             <p>Creator: {data.creator}</p>
             <p>Year: {data.year}</p>
             <p>Genre: {data.genre}</p>
             <p>Status: {data.status}</p>
             <p>Rating: {data.rating ?? "Not rated"}</p>
             <p>Note: {data.note ?? "No notes yet"}</p>
-            <select
-                value={data.status}
-                onChange={(e) =>
-                    statusMutation.mutate(
-                        e.target.value as Item["status"]
-                    )
-                }
-                className="border rounded p-2"
-            >
-                <option value="want">Want</option>
-                <option value="active">Active</option>
-                <option value="done">Done</option>
-                <option value="dropped">Dropped</option>
-            </select>
-            <select
-                value={data.rating ?? ""}
-                onChange={(e) =>
-                    ratingMutation.mutate(
-                        e.target.value === "" ? null : Number(e.target.value)
-                    )
-                }
-                className="border rounded p-2 mx-4"
-            >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
+
+            <div className="flex flex-wrap gap-4 mt-4">
+                <select
+                    value={data.status}
+                    onChange={(e) => statusMutation.mutate(e.target.value as Item["status"])}
+                    className={selectClass}
+                >
+                    <option value="want">Want</option>
+                    <option value="active">Active</option>
+                    <option value="done">Done</option>
+                    <option value="dropped">Dropped</option>
+                </select>
+
+                <select
+                    value={data.rating ?? ""}
+                    onChange={(e) =>
+                        ratingMutation.mutate(
+                            e.target.value === "" ? null : Number(e.target.value)
+                        )
+                    }
+                    className={selectClass}
+                >
+                    <option value="">No rating</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+
             <div className="mt-6">
-                <label className="block font-medium mb-2">
-                    Note
-                </label>
+                <label className="block font-medium mb-2">Note</label>
                 <textarea
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                     rows={4}
-                    className="w-full border rounded p-2"
+                    className={`w-full border rounded p-2 ${
+                        theme === "dark"
+                            ? "bg-gray-800 text-white border-gray-600"
+                            : "bg-white text-black border-gray-300"
+                    }`}
                 />
                 <button
-                    onClick={() =>
-                        noteMutation.mutate(
-                            note.trim() === "" ? null : note
-                        )
-                    }
-                    className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
+                    onClick={() => noteMutation.mutate(note.trim() === "" ? null : note)}
+                    className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
                 >
                     Save Note
                 </button>

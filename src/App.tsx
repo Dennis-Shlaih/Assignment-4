@@ -1,13 +1,13 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom';
 
 import { useUiStore } from "./store/useUiStore";
 
-import AboutPage from './pages/AboutPage'
-import CatalogPage from './pages/CatalogPage'
-import DetailPage from './pages/DetailPage'
-import StatusPage from './pages/StatusPage'
-import NotFoundPage from './pages/NotFoundPage'
-import NavBar from './components/NavBar'
+import AboutPage from './pages/AboutPage';
+import CatalogPage from './pages/CatalogPage';
+import DetailPage from './pages/DetailPage';
+import StatusPage from './pages/StatusPage';
+import NotFoundPage from './pages/NotFoundPage';
+import NavBar from './components/NavBar';
 
 function App() {
   const theme = useUiStore((state) => state.theme);

@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+import { useUiStore} from '../store/useUiStore';
 
 function SearchBar() {
+    const theme = useUiStore((state) => state.theme)
+
     const [searchParams, setSearchParams] = useSearchParams();
     const initialQuery = searchParams.get("q") ?? "";
     const [value, setValue] = useState(initialQuery);
     useEffect(() => {
         setValue(initialQuery);
     }, [initialQuery]);
-    
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         const newValue = e.target.value;
         setValue(newValue);
@@ -24,9 +27,13 @@ function SearchBar() {
     }
 
     return (
-        <div className="w-full max-w-md">
+        <div className="w-full">
             <input 
-                className="w-full p-2 border rounded"
+                className={`border rounded px-4 py-2 w-full ${
+                    theme === "dark" 
+                        ? "bg-gray-800 text-white border-gray-600" 
+                        : "bg-white text-black border-gray-300"
+                }`}
                 type="text"
                 value={value}
                 onChange={handleChange}

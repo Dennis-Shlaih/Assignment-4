@@ -1,0 +1,204 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "title": "Interstellar",
+      "creator": "Christopher Nolan",
+      "year": 2014,
+      "genre": "Science Fiction",
+      "status": "dropped",
+      "rating": null,
+      "note": "Amazing visuals and soundtrack."
+    },
+    {
+      "id": 2,
+      "title": "Inception",
+      "creator": "Christopher Nolan",
+      "year": 2010,
+      "genre": "Science Fiction",
+      "status": "want",
+      "rating": null,
+      "note": null
+    },
+    {
+      "id": 3,
+      "title": "The Dark Knight",
+      "creator": "Christopher Nolan",
+      "year": 2008,
+      "genre": "Action",
+      "status": "done",
+      "rating": 5,
+      "note": "Best Batman movie."
+    },
+    {
+      "id": 4,
+      "title": "Dune",
+      "creator": "Denis Villeneuve",
+      "year": 2021,
+      "genre": "Science Fiction",
+      "status": "active",
+      "rating": 4,
+      "note": "Halfway through."
+    },
+    {
+      "id": 5,
+      "title": "Blade Runner 2049",
+      "creator": "Denis Villeneuve",
+      "year": 2017,
+      "genre": "Science Fiction",
+      "status": "want",
+      "rating": null,
+      "note": null
+    },
+    {
+      "id": 6,
+      "title": "Arrival",
+      "creator": "Denis Villeneuve",
+      "year": 2016,
+      "genre": "Science Fiction",
+      "status": "done",
+      "rating": 5,
+      "note": "Excellent storytelling."
+    },
+    {
+      "id": 7,
+      "title": "The Matrix",
+      "creator": "The Wachowskis",
+      "year": 1999,
+      "genre": "Science Fiction",
+      "status": "want",
+      "rating": null,
+      "note": null
+    },
+    {
+      "id": 8,
+      "title": "John Wick",
+      "creator": "Chad Stahelski",
+      "year": 2014,
+      "genre": "Action",
+      "status": "active",
+      "rating": 4,
+      "note": "Watching this week."
+    },
+    {
+      "id": 9,
+      "title": "Gladiator",
+      "creator": "Ridley Scott",
+      "year": 2000,
+      "genre": "Historical",
+      "status": "done",
+      "rating": 5,
+      "note": "Classic."
+    },
+    {
+      "id": 10,
+      "title": "Alien",
+      "creator": "Ridley Scott",
+      "year": 1979,
+      "genre": "Horror",
+      "status": "want",
+      "rating": null,
+      "note": null
+    },
+    {
+      "id": 11,
+      "title": "The Martian",
+      "creator": "Ridley Scott",
+      "year": 2015,
+      "genre": "Science Fiction",
+      "status": "active",
+      "rating": 4,
+      "note": "Enjoying it."
+    },
+    {
+      "id": 12,
+      "title": "The Godfather",
+      "creator": "Francis Ford Coppola",
+      "year": 1972,
+      "genre": "Crime",
+      "status": "done",
+      "rating": 5,
+      "note": "Masterpiece."
+    },
+    {
+      "id": 13,
+      "title": "The Batman",
+      "creator": "Matt Reeves",
+      "year": 2022,
+      "genre": "Action",
+      "status": "want",
+      "rating": null,
+      "note": null
+    },
+    {
+      "id": 14,
+      "title": "Whiplash",
+      "creator": "Damien Chazelle",
+      "year": 2014,
+      "genre": "Drama",
+      "status": "active",
+      "rating": 5,
+      "note": "Almost finished."
+    },
+    {
+      "id": 15,
+      "title": "La La Land",
+      "creator": "Damien Chazelle",
+      "year": 2016,
+      "genre": "Drama",
+      "status": "dropped",
+      "rating": 3,
+      "note": "Didn't finish."
+    },
+    {
+      "id": 16,
+      "title": "Parasite",
+      "creator": "Bong Joon-ho",
+      "year": 2019,
+      "genre": "Thriller",
+      "status": "dropped",
+      "rating": 4,
+      "note": "Need to revisit."
+    },
+    {
+      "id": 17,
+      "title": "The Social Network",
+      "creator": "David Fincher",
+      "year": 2010,
+      "genre": "Drama",
+      "status": "dropped",
+      "rating": 4,
+      "note": "Paused."
+    },
+    {
+      "id": 18,
+      "title": "Fight Club",
+      "creator": "David Fincher",
+      "year": 1999,
+      "genre": "Drama",
+      "status": "dropped",
+      "rating": 5,
+      "note": "Will restart later."
+    },
+    {
+      "id": 19,
+      "title": "Se7en",
+      "creator": "David Fincher",
+      "year": 1995,
+      "genre": "Crime",
+      "status": "active",
+      "rating": 5,
+      "note": "Excellent mystery."
+    },
+    {
+      "id": 20,
+      "title": "The Prestige",
+      "creator": "Christopher Nolan",
+      "year": 2006,
+      "genre": "Drama",
+      "status": "dropped",
+      "rating": 4,
+      "note": "Need to finish."
+    }
+  ]
+}

@@ -30,7 +30,7 @@ export const useUiStore = create<UiStore>()(
         }),
         
         {
-            name: "mywatch.ui",
+            name: "watchpile.ui",
             partialize: (state) => ({ theme: state.theme, density: state.density }),
         }
 

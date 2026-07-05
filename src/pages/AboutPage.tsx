@@ -2,11 +2,11 @@ function AboutPage() {
     return (
         <main className="max-w-3xl mx-auto p-6">
             <h1 className="text-3xl font-bold mb-4">
-                About MyWatch
+                About WatchPile
             </h1>
 
             <p className="mb-4">
-                MyWatch is a personal movie tracker that helps users keep
+                WatchPile is a personal movie tracker that helps users keep
                 track of films they want to watch, are currently watching,
                 have completed, or have dropped.
             </p>

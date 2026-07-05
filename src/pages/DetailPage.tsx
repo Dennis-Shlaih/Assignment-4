@@ -1,18 +1,32 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
-import { fetchItem } from '../services/api'
+import { fetchItem, updateItem } from '../services/api'
+
 import type { Item } from '../types/Item'
 
-
 function DetailPage() {
+    const queryClient = useQueryClient();
     const { id } = useParams()
 
     const {data, isPending, isError} = useQuery<Item>(
         {
-            queryKey: ["Items", id],
+            queryKey: ["items", id],
             queryFn: () => fetchItem(id!)
         }
     );
+    
+    const statusMutation = useMutation({
+        mutationFn: (newStatus: Item["status"]) =>
+            updateItem(Number(id), {
+                status: newStatus,
+            }),
+
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["items"],
+            });
+        },
+    });
 
     if (isPending) {
         return <p>Loading...</p>
@@ -23,6 +37,8 @@ function DetailPage() {
      if (!data) {
         return <p>Item not found.</p>;
     }
+
+    
 
     return (
         <main className="p-6">
@@ -35,6 +51,20 @@ function DetailPage() {
             <p>Status: {data.status}</p>
             <p>Rating: {data.rating ?? "Not rated"}</p>
             <p>Note: {data.note ?? "No notes yet"}</p>
+            <select
+                value={data.status}
+                onChange={(e) =>
+                    statusMutation.mutate(
+                        e.target.value as Item["status"]
+                    )
+                }
+                className="border rounded p-2"
+            >
+                <option value="want">Want</option>
+                <option value="active">Active</option>
+                <option value="done">Done</option>
+                <option value="dropped">Dropped</option>
+            </select>
         </main>
     );
 }

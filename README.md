@@ -1,75 +1,105 @@
-# React + TypeScript + Vite
+# WatchPile
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal movie tracking app built with React + TypeScript. Browse a catalog of films, track your watch status, leave notes, and rate movies you've finished.
 
-Currently, two official plugins are available:
+## Theme
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A movie tracker where you can organize films into four lists, Want, Active, Done, and Dropped, with ratings and personal notes on each.
 
-## React Compiler
+## Screenshots
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Catalog Page
 
-## Expanding the ESLint configuration
+![Catalog](./screenshots/Catalog.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Status Filter
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+![Status](./screenshots/Status.png)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Movie Detail
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+![Detail](./screenshots/Detail.png)
 
+
+## Setup
+
+Two terminals are required:
+
+**Terminal 1: API server:**
+```bash
+npm install
+npm run server
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**Terminal 2: Vite dev server:**
+```bash
+npm run dev
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+To reset the database to its original seed data:
+```bash
+npm run reset-db
+```
 
+## Tech Stack
+
+- React 19 + TypeScript
+- React Router v7
+- TanStack Query v5
+- Zustand v5 with persist middleware
+- Tailwind CSS v4
+- json-server v0.17.4
+
+## Features
+
+- Browse full movie catalog with title search (query persists in URL)
+- Filter by status: Want, Active, Done, Dropped
+- Detail page per movie: update status, rating, and notes
+- Light/dark theme toggle persisted across reloads
+- Compact/comfortable density toggle persisted across reloads
+- Responsive layout for mobile and desktop
+
+## Project Structure
+
+```text
+assignment-4/
+├── screenshots/
+│   ├── Catalpg.png
+│   ├── Detail.png
+│   └── Status.png
+│
+├── src/
+│   ├── components/
+│   │   ├── DensitySelector.tsx
+│   │   ├── NavBar.tsx
+│   │   ├── SearchBar.tsx
+│   │   └── ThemeToggle.tsx
+│   │
+│   ├── pages/
+│   │   ├── AboutPage.tsx
+│   │   ├── CatalogPage.tsx
+│   │   ├── DetailPage.tsx
+│   │   ├── NotFoundPage.tsx
+│   │   └── StatusPage.tsx
+│   │
+│   ├── services/
+│   │   └── api.ts
+│   │
+│   ├── store/
+│   │   └── useUiStore.ts
+│   │
+│   ├── types/
+│   │   └── Item.ts
+│   │
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+│
+├── db.json
+├── db.seed.json
+├── package.json
+├── README.md
+└── vite.config.ts
 ```

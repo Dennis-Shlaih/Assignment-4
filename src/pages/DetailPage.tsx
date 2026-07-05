@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { fetchItem, updateItem } from '../services/api'
@@ -42,7 +43,7 @@ function DetailPage() {
     });
 
     const noteMutation = useMutation({
-        mutationFn: (newNote: string) =>
+        mutationFn: (newNote: string | null) =>
             updateItem(Number(id), {
                 note: newNote,
             }),
@@ -53,6 +54,13 @@ function DetailPage() {
             });
         },
     });
+    
+    const [note, setNote] = useState("");
+    useEffect(() => {
+        if (data) {
+            setNote(data.note ?? "");
+        }
+    }, [data]);
 
     if (isPending) {
         return <p>Loading...</p>
@@ -96,7 +104,7 @@ function DetailPage() {
                         e.target.value === "" ? null : Number(e.target.value)
                     )
                 }
-                className="border rounded p-2"
+                className="border rounded p-2 mx-4"
             >
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -104,6 +112,27 @@ function DetailPage() {
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
+            <div className="mt-6">
+                <label className="block font-medium mb-2">
+                    Note
+                </label>
+                <textarea
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                    rows={4}
+                    className="w-full border rounded p-2"
+                />
+                <button
+                    onClick={() =>
+                        noteMutation.mutate(
+                            note.trim() === "" ? null : note
+                        )
+                    }
+                    className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
+                >
+                    Save Note
+                </button>
+            </div>
         </main>
     );
 }

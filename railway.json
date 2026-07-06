@@ -1,6 +1,7 @@
 {
     "build": {
-        "builder": "NIXPACKS"
+        "builder": "NIXPACKS",
+        "buildCommand": "cp db.seed.json db.json"
     },
     "deploy": {
         "startCommand": "npx json-server --watch db.json --port $PORT --host 0.0.0.0"

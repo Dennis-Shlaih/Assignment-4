@@ -31,6 +31,10 @@ function StatusPage() {
     const filteredData = statusFiltered.filter((item) =>
         item.title.toLowerCase().includes(query.toLowerCase())
     );
+    
+    {filteredData.length === 0 && (
+        <p className="text-sm text-gray-500 mt-4">No items found.</p>
+    )}
 
     return (
         <main className="p-6">

@@ -3,6 +3,6 @@
         "builder": "NIXPACKS"
     },
     "deploy": {
-        "startCommand": "npx json-server --watch db.json --port 3001"
+        "startCommand": "npx json-server --watch db.json --port $PORT --host 0.0.0.0"
     }
 }

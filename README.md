@@ -61,6 +61,13 @@ npm run reset-db
 - Compact/comfortable density toggle persisted across reloads
 - Responsive layout for mobile and desktop
 
+## Stretch Features
+
+- **Deployed to Vercel + Railway**
+  - Live URL works in icognito    
+  - Frontend: https://assignment-4-rust-xi.vercel.app/
+  - API: https://assignment-4-production-086f.up.railway.app
+
 ## Project Structure
 
 ```text

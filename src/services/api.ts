@@ -1,6 +1,7 @@
 import type {Item} from '../types/Item';
 
-const API_URL = "http://localhost:3001";
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3001";
+
 export async function fetchItems() {
     const response = await fetch(`${API_URL}/items`);
 
